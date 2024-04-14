@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="text-center">
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+            <h1 class="display-4">GİRİŞ YAPILMADI</h1>
+        </div>
+    }
+    else
+    {
+        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+            <h1 class="display-4">GİRİŞ YAPILDI</h1>
+        </div>
+    }
+</div>

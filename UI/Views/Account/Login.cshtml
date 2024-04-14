@@ -1,0 +1,23 @@
+﻿@model LoginDto;
+<div class="container">
+    <form asp-action="Login" asp-controller="Account">
+        <div class="form-group">
+            <label for="exampleInputEmail1">E-Posta - </label>
+            <small id="emailHelp" class="form-text text-muted">Kayıt olurken belirlediğiniz e-posta adresi.</small>
+
+            <input type="email" class="form-control" asp-for="Email" aria-describedby="emailHelp" placeholder="E-Posta">
+            <br />
+            <span asp-validation-for="Email"></span>
+        </div>
+        <br />
+        <div class="form-group">
+            <label for="exampleInputPassword1">Şifre</label>
+            <input type="password" class="form-control" asp-for="Password" placeholder="Şifre">
+            <br />
+            <span asp-validation-for="Password"></span>
+        </div>
+        <br />
+        <div asp-validation-summary="ModelOnly"></div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
