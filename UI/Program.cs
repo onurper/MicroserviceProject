@@ -1,8 +1,6 @@
 using Core.DTOs;
 using FluentValidation;
 using Service.ValidationRules;
-using SharedLibrary.Configurations;
-using SharedLibrary.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +9,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<IValidator<LoginDto>, LoginValidator>();
 builder.Services.AddScoped<IValidator<ProductDto>, ProductValidator>();
+builder.Services.AddScoped<IValidator<CreateUserDto>, RegisterValidator>();
 
 var app = builder.Build();
 

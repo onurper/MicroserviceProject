@@ -1,8 +1,8 @@
 ﻿using Core.DTOs;
 using Core.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 using SharedLibrary.Extensions;
+using System.Threading.Tasks;
 
 namespace API.Auth.Controllers
 {

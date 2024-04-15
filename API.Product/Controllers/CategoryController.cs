@@ -1,9 +1,7 @@
 ﻿using Core.Models;
 using Core.Services;
 using Data;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Service.Services;
 using SharedLibrary.Extensions;
 
 namespace API.Product.Controllers

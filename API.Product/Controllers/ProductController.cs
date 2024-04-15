@@ -1,14 +1,12 @@
 ﻿using Core.DTOs;
 using Core.Services;
+using MassTransit;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SharedLibrary.Dtos;
-using SharedLibrary.Extensions;
-using MassTransit;
 using SharedLibrary.Events;
-using Microsoft.AspNetCore.Authorization;
+using SharedLibrary.Extensions;
 using System.Security.Claims;
-using Core.Models;
-using Data;
 
 namespace API.Product.Controllers
 {
@@ -19,6 +17,7 @@ namespace API.Product.Controllers
     {
         private readonly IProductService _productService;
         private readonly IPublishEndpoint _publishEndpoint;
+
         public ProductController(IProductService productService, IPublishEndpoint publishEndpoint)
         {
             _productService = productService;

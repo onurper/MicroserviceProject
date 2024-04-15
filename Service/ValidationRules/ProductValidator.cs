@@ -1,7 +1,6 @@
 ﻿using Core.DTOs;
 using FluentValidation;
 
-
 namespace Service.ValidationRules
 {
     public class ProductValidator : AbstractValidator<ProductDto>

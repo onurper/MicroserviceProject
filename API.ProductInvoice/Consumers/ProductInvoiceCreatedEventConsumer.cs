@@ -46,7 +46,6 @@ namespace API.ProductInvoice.Consumers
                 }
                 else
                 {
-
                     var sendEndpoint = await sendEndpointProvider.GetSendEndpoint(new Uri($"queue:{RabbitMQSettings.ProductInvoiceWorkingEventQueueName}"));
 
                     await sendEndpoint.Send(new ProductInvoiceWorkingEvent()
@@ -69,7 +68,6 @@ namespace API.ProductInvoice.Consumers
 
                 logger.LogInformation($"Ürün takibi tablosuna ekleme yapıldı. Kullanıcı : {context.Message.UserId}");
             }
-
         }
     }
 }

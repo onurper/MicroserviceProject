@@ -1,13 +1,10 @@
-﻿using Azure.Core;
-using Core.Configuration;
-using Core.DTOs;
+﻿using Core.DTOs;
 using Core.Models;
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SharedLibrary.Dtos;
-using System.Net.Http;
 using System.Text;
 using UI.Mapper;
 using UI.Models;

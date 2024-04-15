@@ -1,16 +1,16 @@
+using API.Product.Consumers;
 using Core.Repositories;
 using Core.Services;
 using Core.UnitOfWork;
 using Data;
 using Data.Repositories;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using Service.Services;
 using SharedLibrary.Configurations;
-using SharedLibrary.Extensions;
-using MassTransit;
-using API.Product.Consumers;
 using SharedLibrary.Events;
-using Microsoft.OpenApi.Models;
+using SharedLibrary.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
