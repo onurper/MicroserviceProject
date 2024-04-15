@@ -8,6 +8,6 @@ namespace Core.Services
 {
     public interface IUserService : IServiceGeneric<User, DbContext>
     {
-        Task<Response<UserAppDto>> CreateUserAsync(CreateUserDto createUserDto);
+        Task<Response<UserDto>> CreateUserAsync(CreateUserDto createUserDto);
     }
 }

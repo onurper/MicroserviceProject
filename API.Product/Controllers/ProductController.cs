@@ -7,6 +7,8 @@ using MassTransit;
 using SharedLibrary.Events;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using Core.Models;
+using Data;
 
 namespace API.Product.Controllers
 {
@@ -40,7 +42,7 @@ namespace API.Product.Controllers
                 Deleted = false,
                 Price = productDto.Price,
                 Stock = productDto.Stock,
-                ProductName = productDto.Name
+                ProductName = productDto.ProductName
             };
 
             var newProductResult = await _productService.AddAsync(product);
@@ -52,7 +54,7 @@ namespace API.Product.Controllers
             {
                 UserId = userId,
                 ProductId = newProductResult.Data.ProductId,
-                InvoiceNumber = $"FA-{userId}-{DateTime.Now.AddTicks}",
+                InvoiceNumber = $"FA-{userId}-{DateTime.Now.ToShortTimeString()}",
                 ProductInvoiceMessage = new ProductInvoiceMessage() { UserId = userId, ProductId = newProductResult.Data.ProductId }
             };
 

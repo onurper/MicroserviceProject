@@ -10,9 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<IValidator<LoginDto>, LoginValidator>();
-
-builder.Services.Configure<CustomTokenOption>(builder.Configuration.GetSection("TokenOption"));
-builder.Services.AddCustomTokenAuth(builder.Configuration.GetSection("TokenOption").Get<CustomTokenOption>());
+builder.Services.AddScoped<IValidator<ProductDto>, ProductValidator>();
 
 var app = builder.Build();
 

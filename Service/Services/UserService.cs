@@ -18,7 +18,7 @@ namespace Service.Services
             _userRep = genericRepository;
         }
 
-        public async Task<Response<UserAppDto>> CreateUserAsync(CreateUserDto createUserDto)
+        public async Task<Response<UserDto>> CreateUserAsync(CreateUserDto createUserDto)
         {
             var user = new User { Email = createUserDto.Email, UserName = createUserDto.UserName };
 
@@ -28,10 +28,10 @@ namespace Service.Services
             }
             catch (Exception Ex)
             {
-                return Response<UserAppDto>.Fail(new ErrorDto(Ex.Message, true), 400);
+                return Response<UserDto>.Fail(new ErrorDto(Ex.Message, true), 400);
             }
 
-            return Response<UserAppDto>.Success(ObjectMapper.Mapper.Map<UserAppDto>(user), 200);
+            return Response<UserDto>.Success(new UserDto { Id = user.Id, UserName = user.UserName, Email = user.Email }, 200);
         }
     }
 }

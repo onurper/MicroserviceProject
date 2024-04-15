@@ -21,15 +21,44 @@ namespace API.ProductInvoice.Consumers
 
         public async Task Consume(ConsumeContext<ProductCreatedEvent> context)
         {
-            var result = await productInvoiceService.AddAsync(new Core.Models.ProductInvoice()
+            try
             {
-                Deleted = false,
-                ProductId = context.Message.ProductId,
-                UserId = context.Message.UserId,
-                InvoiceNumber = context.Message.InvoiceNumber
-            });
+                //throw new NotImplementedException();
 
-            if (!result.IsSuccessful)
+                var result = await productInvoiceService.AddAsync(new Core.Models.ProductInvoice()
+                {
+                    Deleted = false,
+                    ProductId = context.Message.ProductId,
+                    UserId = context.Message.UserId,
+                    InvoiceNumber = context.Message.InvoiceNumber
+                });
+
+                if (!result.IsSuccessful)
+                {
+                    await _publishEndpoint.Publish(new ProductInvoiceNotWorkingEvent()
+                    {
+                        ErrorMessage = "Ürün takibi ekleme aşamasında bir hata oluştu",
+                        UserId = context.Message.UserId,
+                        ProductId = context.Message.ProductId,
+                    });
+
+                    logger.LogInformation($"Ürün takibi tablosuna ekleme yapıldı. Kullanıcı : {context.Message.UserId}");
+                }
+                else
+                {
+
+                    var sendEndpoint = await sendEndpointProvider.GetSendEndpoint(new Uri($"queue:{RabbitMQSettings.ProductInvoiceWorkingEventQueueName}"));
+
+                    await sendEndpoint.Send(new ProductInvoiceWorkingEvent()
+                    {
+                        ProductInvoiceId = result.Data.ProductInvoiceId,
+                        SuccessMessage = "Ürün takibi ekleme işlemi başarılı."
+                    });
+
+                    logger.LogInformation($"Ürün takibi tablosuna ekleme yapıldı. Kullanıcı : {context.Message.UserId}");
+                }
+            }
+            catch (Exception)
             {
                 await _publishEndpoint.Publish(new ProductInvoiceNotWorkingEvent()
                 {
@@ -40,19 +69,7 @@ namespace API.ProductInvoice.Consumers
 
                 logger.LogInformation($"Ürün takibi tablosuna ekleme yapıldı. Kullanıcı : {context.Message.UserId}");
             }
-            else
-            {
 
-                var sendEndpoint = await sendEndpointProvider.GetSendEndpoint(new Uri($"queue:{RabbitMQSettings.ProductInvoiceWorkingEventQueueName}"));
-
-                await sendEndpoint.Send(new ProductInvoiceWorkingEvent()
-                {
-                    ProductInvoiceId = result.Data.ProductInvoiceId,
-                    SuccessMessage = "Ürün takibi ekleme işlemi başarılı."
-                });
-
-                logger.LogInformation($"Ürün takibi tablosuna ekleme yapıldı. Kullanıcı : {context.Message.UserId}");
-            }
         }
     }
 }

@@ -1,6 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-using UI.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace UI.Controllers
 {

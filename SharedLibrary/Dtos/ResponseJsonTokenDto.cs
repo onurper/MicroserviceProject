@@ -31,4 +31,18 @@ namespace SharedLibrary.Dtos
 
         public bool IsShow { get; private set; }
     }
+
+    public class ResponseJsonDeserializeObject<T> where T : class
+    {
+        public T Data { get; set; }
+        public int StatusCode { get; set; }
+        public int ErrorKey { get; set; }
+        public Error Error { get; set; }
+    }
+
+    public class Error
+    {
+        public string[] Errors { get; set; }
+        public bool IsShow { get; set; }
+    }
 }

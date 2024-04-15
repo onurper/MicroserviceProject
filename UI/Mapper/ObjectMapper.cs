@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
-using System;
 
-namespace Service
+namespace UI.Mapper
 {
     public static class ObjectMapper
     {

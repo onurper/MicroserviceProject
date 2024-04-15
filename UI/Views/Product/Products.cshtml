@@ -1,0 +1,27 @@
+﻿@model List<ProductDto>;
+<div class="container-fluid">
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Ürün Adı</th>
+                <th scope="col">Ürün Fiyatı</th>
+                <th scope="col">Stok</th>
+                <th scope="col">Kategori</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Select((value, i) => new { i = i + 1, value }))
+            {
+                <tr>
+                    <th scope="row">@item.i</th>
+                    <td>@item.value.ProductName</td>
+                    <td>@item.value.Price</td>
+                    <td>@item.value.Stock</td>
+                    <td>@item.value.CategoryId</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a class="btn btn-primary" asp-area="" asp-controller="Product" asp-action="CreateProduct">Yeni Ürün Ekle</a>
+</div>

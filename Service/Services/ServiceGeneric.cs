@@ -38,6 +38,13 @@ namespace Service.Services
             return Response<IEnumerable<TEntity>>.Success(products, 200);
         }
 
+        public async Task<Response<IEnumerable<TEntity>>> GetAllCategoryAsync()
+        {
+            var products = await _genericRepository.GetAllAsync();
+
+            return Response<IEnumerable<TEntity>>.Success(products, 200);
+        }
+
         public async Task<Response<TEntity>> GetByIdAsync(int id)
         {
             var product = await _genericRepository.GetByIdAsync(id);

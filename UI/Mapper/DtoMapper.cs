@@ -2,14 +2,15 @@
 using Core.DTOs;
 using Core.Models;
 
-namespace Service
+namespace UI.Mapper
 {
     internal class DtoMapper : Profile
     {
         public DtoMapper()
         {
             CreateMap<ProductDto, Product>().ReverseMap();
-            CreateMap<UserAppDto, User>().ReverseMap();
+            CreateMap<ProductDto, Models.CreateProductViewModel>().ReverseMap();
+            CreateMap<UserDto, User>().ReverseMap();
         }
     }
 }

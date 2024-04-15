@@ -12,6 +12,8 @@ namespace Core.Services
 
         Task<Response<IEnumerable<TEntity>>> GetAllAsync();
 
+        Task<Response<IEnumerable<TEntity>>> GetAllCategoryAsync();
+
         Task<Response<IEnumerable<TEntity>>> Where(Expression<Func<TEntity, bool>> predicate);
 
         Task<Response<TEntity>> AddAsync(TEntity entity);

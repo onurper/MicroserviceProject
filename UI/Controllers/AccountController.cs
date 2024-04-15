@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SharedLibrary.Dtos;
 using System;
+using System.Net;
 using System.Text;
 
 namespace UI.Controllers
@@ -23,7 +24,7 @@ namespace UI.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            if (!User.Identity.IsAuthenticated)
+            if (Request.Cookies["User"] == null)
                 return View();
 
             return RedirectToAction("Index", "Home");
@@ -52,6 +53,13 @@ namespace UI.Controllers
             {
                 var resultJsonData = await response.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<ResponseSuccess>(resultJsonData);
+
+                var options = new CookieOptions
+                {
+                    Expires = DateTime.Now.AddHours(24)
+                };
+
+                HttpContext.Response.Cookies.Append("User", values.data.accessToken, options);
 
                 return RedirectToAction("Index", "Home");
             }

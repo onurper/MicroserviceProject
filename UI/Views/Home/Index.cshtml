@@ -2,7 +2,7 @@
     ViewData["Title"] = "Home Page";
 }
 <div class="text-center">
-    @if (!User.Identity.IsAuthenticated)
+    @if (Context.Request.Cookies["User"] == null)
     {
         <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
             <h1 class="display-4">GİRİŞ YAPILMADI</h1>
